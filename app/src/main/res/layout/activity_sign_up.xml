@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
+    tools:context=".SignUpActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout = "@layout/bar_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-224dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create New Account"
+            android:textSize="32sp"
+            android:layout_gravity="center"
+            android:textColor="@color/login_form_details"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:layout_marginTop="30dp"
+            android:id="@+id/EmailAddress"
+            android:layout_width="325dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:background="@drawable/et_bg"
+            android:hint="@string/email_address"
+            android:textColorHint="@color/login_form_details"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/login_form_details"
+            android:paddingLeft="15dp"
+            android:selectAllOnFocus="true"
+            tools:targetApi="P"/>
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="325dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/et_bg"
+            android:hint="@string/username"
+            android:textColorHint="@color/login_form_details"
+            android:inputType="textPersonName"
+            android:textColor="@color/login_form_details"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:imeOptions="actionDone"
+            android:selectAllOnFocus="true"
+            android:paddingStart="15dp"
+            android:paddingEnd="10dp"
+            tools:targetApi="P"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="325dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/et_bg"
+            android:hint="@string/password"
+            android:textColorHint="@color/login_form_details"
+            android:inputType="textPassword"
+            android:textColor="@color/login_form_details"
+            android:paddingLeft="15dp"
+            android:imeOptions="actionDone"
+            android:selectAllOnFocus="true"
+            tools:targetApi="P"/>
+
+        <EditText
+            android:id="@+id/passwordrepeat"
+            android:layout_width="325dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/et_bg"
+            android:hint="Repeat Password"
+            android:textColorHint="@color/login_form_details"
+            android:inputType="textPassword"
+            android:textColor="@color/login_form_details"
+            android:paddingLeft="15dp"
+            android:imeOptions="actionDone"
+            android:selectAllOnFocus="true"
+            tools:targetApi="P"/>
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/progressBar"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:indeterminateTint="@color/login_form_details"
+            tools:targetApi="lollipop"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/signup"
+            android:layout_width="325dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_bg"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
+            android:textColor="@color/login_form_details_medium"
+            tools:targetApi="LOLLIPOP"/>
+
+    </LinearLayout>
+</RelativeLayout>
