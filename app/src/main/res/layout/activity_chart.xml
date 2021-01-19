@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
+    tools:context=".ChartActivity">
+    <include
+        android:id="@+id/toolbar"
+        layout = "@layout/profile_bar_layout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="42dp"
+                android:layout_marginLeft="6dp"
+                android:src="@drawable/tomato" />
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/tulisan4" />
+        </LinearLayout>
+        <View
+            android:id="@+id/header_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginLeft="0dp"
+            android:background="#fff" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/frgmt"/>
+</RelativeLayout>

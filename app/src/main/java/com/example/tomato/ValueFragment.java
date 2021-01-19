@@ -1,6 +1,7 @@
 package com.example.tomato;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -47,6 +48,7 @@ public class ValueFragment extends Fragment {
     String varIdMoisture2 ="5ff975f04763e7687e665ada";
     String varIdMoisture3 ="5ff975f00ff4c3096c28baaa";
     String varIdPH ="5ff93d4f73efc33556de3394";
+    String varIdRelay = "60000b4e1d84724cb1c75e92";
 
 //    // TODO: Rename parameter arguments, choose names that match
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,6 +91,7 @@ public class ValueFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+
 
         new UbidotsClient().handleUbidots(varIdSuhu, API_KEY, new UbidotsClient.UbiListener() {
             @Override
@@ -222,6 +225,50 @@ public class ValueFragment extends Fragment {
                 }
             }
         });
+
+        new UbidotsClient().handleUbidots(varIdRelay, API_KEY, new UbidotsClient.UbiListener() {
+            @Override
+            public void onDataReady(final List<UbidotsClient.Value>result) {
+
+                for (int i=0; i<result.size(); i++){
+                    Log.i("relay", "onDataReady: "+result.get(0).value);
+                    final String dt = String.valueOf(result.get(0).value);
+                    final Handler[] handler = {new Handler(ValueFragment.this.getActivity().getMainLooper())};
+                    handler[0].post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (dt.equals("1.00"))
+                            {
+                                handler[0] = new Handler();
+                                StartTime = SystemClock.uptimeMillis();
+                                handler[0].postDelayed(runnable, 0);
+                                timerCard.setVisibility(VISIBLE);
+                                //databaseReference.child("Pompa").setValue("1");
+                                btnSiram.setEnabled(false);
+                                btnStop.setEnabled(true);
+                            }
+                            else
+                            {
+                                MillisecondTime = 0L ;
+                                StartTime = 0L ;
+                                TimeBuff = 0L ;
+                                UpdateTime = 0L ;
+                                Seconds = 0 ;
+                                Minutes = 0 ;
+                                MilliSeconds = 0 ;
+
+                                txtTimer.setText("00:00:00");
+                                timerCard.setVisibility(INVISIBLE);
+                                btnSiram.setEnabled(true);
+                                btnStop.setEnabled(false);
+                                //databaseReference.child("Pompa").setValue("0");
+                            }
+
+                        }
+                    });
+                }
+            }
+        });
         handler = new Handler();
         btnSiram =  v.findViewById(R.id.siram);
         btnStop =  v.findViewById(R.id.stop);
@@ -254,6 +301,14 @@ public class ValueFragment extends Fragment {
                 btnSiram.setEnabled(true);
                 btnStop.setEnabled(false);
                 //databaseReference.child("Pompa").setValue("0");
+            }
+        });
+
+        txtSuhu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChartActivity.class);
+                startActivity(intent);
             }
         });
 
