@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.os.SystemClock;
@@ -37,6 +39,7 @@ public class ValueFragment extends Fragment {
     int Seconds, Minutes, MilliSeconds, Hours ;
     ListView listView;
     LinearLayout timerCard;
+    Fragment hum,temp,ph,moistA, moist1, moist2, moist3;
     TextView txtTimer;
     Button btnSiram, btnStop;
     TextView txtSuhu, txtHumidity, txtMoistureTotal, txtMoisture1, txtMoisture2, txtMoisture3, txtPH;
@@ -88,6 +91,7 @@ public class ValueFragment extends Fragment {
         btnStop =  v.findViewById(R.id.stop);
         txtTimer = v.findViewById(R.id.timertext);
         timerCard = v.findViewById(R.id.timer);
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -307,8 +311,86 @@ public class ValueFragment extends Fragment {
         txtSuhu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ChartActivity.class);
-                startActivity(intent);
+                final Fragment temp = new SuhuFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frgmnt, temp);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+        txtHumidity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Fragment hum = new HumidityFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frgmnt, hum);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        txtPH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Fragment ph = new PhFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frgmnt, ph);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        txtMoistureTotal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Fragment moistt = new MoistureAverageFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frgmnt, moistt);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        txtMoisture1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Fragment moist1 = new MoistureOneFragment();
+                //Fragment hum = new Fragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frgmnt, moist1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        txtMoisture2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Fragment moist2 = new MoistureTwoFragment();
+                //Fragment hum = new Fragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frgmnt, moist2);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        txtMoisture3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Fragment moist3 = new MoistureThreeFragment();
+                //Fragment hum = new Fragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frgmnt, moist3);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 
