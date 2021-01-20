@@ -106,13 +106,13 @@ public class ValueFragment extends Fragment {
 
                     //txtSuhu.setText(dtSuhu+"\u2103");
                     Handler handler = new Handler(ValueFragment.this.getActivity().getMainLooper());
-                    handler.post(new Runnable() {
+                    handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             txtSuhu.setText(dtSuhu+"\u2103");
                             txtSuhu.invalidate();
                         }
-                    });
+                    }, 5000);
                 }
             }
         });
@@ -125,13 +125,13 @@ public class ValueFragment extends Fragment {
                     final String dt = String.valueOf(result.get(0).value);
                     //txtHumidity.setText(dt+"%");
                     Handler handler = new Handler(ValueFragment.this.getActivity().getMainLooper());
-                    handler.post(new Runnable() {
+                    handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             txtHumidity.setText(dt+"%");
                             txtHumidity.invalidate();
                         }
-                    });
+                    }, 5000);
                 }
             }
         });
@@ -144,13 +144,13 @@ public class ValueFragment extends Fragment {
                     final String dt = String.valueOf(result.get(0).value);
                     //txtPH.setText(dt);
                     Handler handler = new Handler(ValueFragment.this.getActivity().getMainLooper());
-                    handler.post(new Runnable() {
+                    handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             txtPH.setText(dt);
                             txtPH.invalidate();
                         }
-                    });
+                    }, 5000);
                 }
             }
         });
@@ -163,13 +163,13 @@ public class ValueFragment extends Fragment {
                     final String dt = String.valueOf(result.get(0).value);
                     //txtMoistureTotal.setText(dt+"%");
                     Handler handler = new Handler(ValueFragment.this.getActivity().getMainLooper());
-                    handler.post(new Runnable() {
+                    handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             txtMoistureTotal.setText(dt+"%");
                             txtMoistureTotal.invalidate();
                         }
-                    });
+                    }, 5000);
                 }
             }
         });
@@ -182,13 +182,13 @@ public class ValueFragment extends Fragment {
                     final String dt = String.valueOf(result.get(0).value);
                     //txtMoisture1.setText(dt+"%");
                     Handler handler = new Handler(ValueFragment.this.getActivity().getMainLooper());
-                    handler.post(new Runnable() {
+                    handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             txtMoisture1.setText(dt+"%");
                             txtMoisture1.invalidate();
                         }
-                    });
+                    }, 5000);
                 }
             }
         });
@@ -201,13 +201,13 @@ public class ValueFragment extends Fragment {
                     final String dt = String.valueOf(result.get(0).value);
                     //txtMoisture2.setText(dt+"%");
                     Handler handler = new Handler(ValueFragment.this.getActivity().getMainLooper());
-                    handler.post(new Runnable() {
+                    handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             txtMoisture2.setText(dt+"%");
                             txtMoisture2.invalidate();
                         }
-                    });
+                    }, 5000);
                 }
             }
         });
@@ -219,13 +219,13 @@ public class ValueFragment extends Fragment {
                     Log.i("moist3", "onDataReady: "+result.get(0).value);
                     final String dt = String.valueOf(result.get(0).value);
                     Handler handler = new Handler(ValueFragment.this.getActivity().getMainLooper());
-                    handler.post(new Runnable() {
+                    handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             txtMoisture3.setText(dt+"%");
                             txtMoisture3.invalidate();
                         }
-                    });
+                    }, 5000);
                 }
             }
         });
@@ -238,7 +238,7 @@ public class ValueFragment extends Fragment {
                     Log.i("relay", "onDataReady: "+result.get(0).value);
                     final String dt = String.valueOf(result.get(0).value);
                     final Handler[] handler = {new Handler(ValueFragment.this.getActivity().getMainLooper())};
-                    handler[0].post(new Runnable() {
+                    handler[0].postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             if (dt.equals("1.00"))
@@ -269,7 +269,7 @@ public class ValueFragment extends Fragment {
                             }
 
                         }
-                    });
+                    }, 5000);
                 }
             }
         });

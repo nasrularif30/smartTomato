@@ -8,7 +8,7 @@
         android:allowBackup="true"
         android:icon="@drawable/tomato"
         android:label="Tomato"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/tomato"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ChartActivity"></activity>

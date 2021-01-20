@@ -63,7 +63,8 @@ public class StartActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-            }
+
+         }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
