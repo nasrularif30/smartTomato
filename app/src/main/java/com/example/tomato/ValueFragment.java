@@ -43,7 +43,7 @@ public class ValueFragment extends Fragment {
     TextView txtTimer;
     Button btnSiram, btnStop;
     TextView txtSuhu, txtHumidity, txtMoistureTotal, txtMoisture1, txtMoisture2, txtMoisture3, txtPH;
-    String API_KEY = "BBFF-JCKkapS6WlPhjFVDBPs0KLVtYlCOX3";
+    String API_KEY = "BBFF-JCKkapS6WlPhjFVDBPs0KLVtYlCOX3"; //default token
     String varIdSuhu ="5ff93d500ff4c37a420012f9";
     String varIdHumidity ="5ff93d4e0ff4c37cf639af2e";
     String varIdMoistureTotal ="5ff975f14763e768092e259b";
