@@ -42,7 +42,8 @@ import java.util.Map;
 
 public class StartActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
-    FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener fireAuthListener;
     DatabaseReference databaseReference;
     Button btnSiram, btnStop;
 
@@ -61,10 +62,42 @@ public class StartActivity extends AppCompatActivity {
 
 
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
+        //firebaseUser = firebaseAuth.getCurrentUser();
+
+        fireAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user1 = firebaseAuth.getCurrentUser();
+                    if(user1==null){
+                        Toast.makeText(StartActivity.this, "Silakan Login Terlebih Dahulu", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        //StartActivity.this.finish();
+                     }
+            }
+        };
 
 
          }
+    @Override
+    protected void onResume(){
+        super.onResume();
+    }
+         @Override
+         protected void onStart(){
+        super.onStart();
+        firebaseAuth.addAuthStateListener(fireAuthListener);
+         }
+
+         @Override
+         protected void onStop(){
+        super.onStop();
+        if (fireAuthListener != null){
+            firebaseAuth.removeAuthStateListener(fireAuthListener);
+        }
+         }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

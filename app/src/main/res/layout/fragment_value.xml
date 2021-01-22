@@ -64,30 +64,34 @@
                     android:background="@color/login_form_details_medium"
                     android:orientation="horizontal"
                     android:weightSum="3">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="2">
+                        android:layout_weight="2"
+                        android:layout_marginTop="35dp"
+                        android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:layout_margin="6dp"
-                            android:src="@drawable/ic_thermometer"
-                            />
+                            android:src="@drawable/ic_thermometer" />
+
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Suhu Ruang"
-                            android:layout_margin="6dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_margin="6dp"
                             android:fontFamily="@font/opensanslight"
                             android:gravity="center|top"
+                            android:text="Suhu Ruang"
                             android:textAlignment="center"
-                            android:textSize="20dp"
-                            android:textColor="#fff"/>
+                            android:textColor="#fff"
+                            android:textSize="20dp" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -122,6 +126,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:layout_marginTop="30dp"
                         android:layout_weight="2">
                         <ImageView
                             android:layout_width="match_parent"
@@ -129,16 +134,17 @@
                             android:layout_margin="6dp"
                             android:src="@drawable/ic_humidity"
                             />
+
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Kelembapan\nRuang"
-                            android:fontFamily="@font/opensanslight"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:fontFamily="@font/opensanslight"
                             android:gravity="center|top"
+                            android:text="Kelembapan\nRuang"
                             android:textAlignment="center"
-                            android:textSize="20dp"
-                            android:textColor="#fff"/>
+                            android:textColor="#fff"
+                            android:textSize="20dp" />
 
                     </LinearLayout>
                     <LinearLayout
@@ -174,24 +180,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:layout_weight="2">
+                        android:layout_weight="2"
+                        android:layout_marginTop="25dp">
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:layout_margin="6dp"
                             android:src="@drawable/ic_ph"
                             />
+
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="pH\nTanah"
-                            android:fontFamily="@font/opensanslight"
-                            android:layout_margin="6dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_margin="3dp"
+                            android:fontFamily="@font/opensanslight"
                             android:gravity="center|top"
+                            android:text="pH\nTanah"
                             android:textAlignment="center"
-                            android:textSize="20dp"
-                            android:textColor="#fff"/>
+                            android:textColor="#fff"
+                            android:textSize="20dp" />
 
                     </LinearLayout>
                     <LinearLayout
@@ -227,6 +235,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="2">
                         <ImageView
                             android:layout_width="match_parent"
@@ -279,6 +288,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:layout_marginTop="20dp"
                         android:layout_weight="2">
                         <ImageView
                             android:layout_width="match_parent"
@@ -289,7 +299,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Kelembapan\nTanah\nTitik 1"
+                            android:text="Kelembapan\nTanah 1"
                             android:fontFamily="@font/opensanslight"
                             android:layout_gravity="center"
                             android:gravity="center|top"
@@ -331,6 +341,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:layout_marginTop="20dp"
                         android:layout_weight="2">
                         <ImageView
                             android:layout_width="match_parent"
@@ -341,7 +352,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Kelembapan\nTanah\nTitik 2"
+                            android:text="Kelembapan\nTanah 2"
                             android:fontFamily="@font/opensanslight"
                             android:layout_gravity="center"
                             android:gravity="center|top"
@@ -383,6 +394,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:layout_marginTop="15dp"
                         android:layout_weight="2">
                         <ImageView
                             android:layout_width="match_parent"
@@ -393,7 +405,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Kelembapan\nTanah\nTitik 3"
+                            android:text="Kelembapan\nTanah 3"
                             android:fontFamily="@font/opensanslight"
                             android:layout_gravity="center"
                             android:gravity="center|top"
@@ -442,7 +454,7 @@
             android:id="@+id/footer_line"
             android:layout_width="450dp"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="2dp"
             android:layout_marginLeft="0dp"
             android:background="#fff" />
         <LinearLayout
@@ -456,10 +468,10 @@
                 android:layout_height="38dp"
                 android:layout_marginLeft="50dp"
                 android:layout_margin="6dp"
-                android:background="#9A3737"
+                android:background="#812D2D"
                 android:text="@string/siram"
                 android:textAllCaps="false"
-                android:textColor="@color/login_form_details"
+                android:textColor="#ffffff"
                 android:textSize="20sp" />
 
             <Button
@@ -467,11 +479,11 @@
                 android:layout_width="150dp"
                 android:layout_height="38dp"
                 android:layout_marginLeft="30dp"
-                android:background="#9A3737"
+                android:background="#812D2D"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/stop"
                 android:textAllCaps="false"
-                android:textColor="@color/login_form_details"
+                android:textColor="#ffffff"
                 android:textSize="20sp" />
         </LinearLayout>
 

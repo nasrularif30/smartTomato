@@ -30,13 +30,14 @@
                 android:layout_width="150dp"
                 android:layout_height="42dp"
                 android:layout_marginTop="2dp"
+                android:layout_marginLeft="-13dp"
                 android:src="@drawable/tulisan4" />
         </LinearLayout>
         <View
             android:id="@+id/header_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="-10dp"
+            android:layout_marginTop="-3dp"
             android:layout_marginLeft="0dp"
             android:background="#fff" />
     </LinearLayout>
