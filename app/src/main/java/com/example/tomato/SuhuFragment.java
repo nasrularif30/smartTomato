@@ -31,15 +31,15 @@ import java.util.List;
 
 public class SuhuFragment extends Fragment {
 
-    public String API_KEY = "BBFF-sFOAioOKr7PpSK7Ikq7qs7whA0MzYy"; //default token
-    public String varIdSuhu ="60092d991d84727b5be9698d";
-    public String varIdHumidity ="60092d721d84727b6e3bfab9";
-    public String varIdMoistureTotal ="60092d411d84727e4ca25ccc";
-    public String varIdMoisture1 ="60092c651d84727aafcbd9e5";
-    public String varIdMoisture2 ="60092cd91d84727dc34b37ac";
-    public String varIdMoisture3 ="60092d031d84727dc34b37ad";
-    public String varIdPH ="60092aec1d84727683c242db";
-    public String varIdRelay = "60092dc91d84727fcd096c36";
+    public String API_KEY = "BBFF-bRCyIwm7QglxicrU3vFNECXZwqyrGC"; //default token
+    public String varIdSuhu ="603345651d847277f7d3ce41";
+    public String varIdHumidity ="6033453f1d847275e3310e71";
+    public String varIdMoistureTotal ="603344ee1d84727642befcfc";
+    public String varIdMoisture1 ="603343e61d847273fdb720e3";
+    public String varIdMoisture2 ="603344111d84727244f59bf6";
+    public String varIdMoisture3 ="603344a11d8472760dedd957";
+    public String varIdPH ="6033451c1d84727641848a63";
+    public String varIdRelay = "603345871d847277aedec788";
 
 
 
