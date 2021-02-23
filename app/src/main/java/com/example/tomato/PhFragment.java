@@ -31,15 +31,15 @@ import java.util.List;
 
 public class PhFragment extends Fragment {
 
-    private String API_KEY = "BBFF-JCKkapS6WlPhjFVDBPs0KLVtYlCOX3";
-    private String varIdSuhu ="5ff93d500ff4c37a420012f9";
-    private String varIdHumidity ="5ff93d4e0ff4c37cf639af2e";
-    String varIdMoistureTotal ="5ff975f14763e768092e259b";
-    String varIdMoisture1 ="5ff93d4e4763e7191cfc6cad";
-    String varIdMoisture2 ="5ff975f04763e7687e665ada";
-    String varIdMoisture3 ="5ff975f00ff4c3096c28baaa";
-    String varIdPH ="5ff93d4f73efc33556de3394";
-    String varIdRelay = "60000b4e1d84724cb1c75e92";
+    String API_KEY = VarId.API_KEY;
+    String varIdSuhu = VarId.varIdSuhu;
+    String varIdHumidity = VarId.varIdHumidity;
+    String varIdMoistureTotal =VarId.varIdMoistureTotal;
+    String varIdMoisture1 = VarId.varIdMoisture1;
+    String varIdMoisture2 = VarId.varIdMoisture2;
+    String varIdMoisture3 = VarId.varIdMoisture3;
+    String varIdPH = VarId.varIdPH;
+    String varIdRelay = VarId.varIdRelay;
 
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

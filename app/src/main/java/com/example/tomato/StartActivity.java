@@ -42,9 +42,11 @@ import java.util.Map;
 
 public class StartActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
-    FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
     Button btnSiram, btnStop;
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener fireAuthListener;
 
 
     @Override
@@ -62,6 +64,18 @@ public class StartActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+
+        fireAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                FirebaseUser user1 = firebaseAuth.getCurrentUser();
+                if (user1==null){
+                    StartActivity.this.startActivity(new Intent(StartActivity.this, MainActivity.class));
+                    StartActivity.this.finish();
+                }
+            }
+        };
 
 
          }

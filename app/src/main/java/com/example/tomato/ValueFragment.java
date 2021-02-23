@@ -43,15 +43,15 @@ public class ValueFragment extends Fragment {
     TextView txtTimer;
     Button btnSiram, btnStop;
     TextView txtSuhu, txtHumidity, txtMoistureTotal, txtMoisture1, txtMoisture2, txtMoisture3, txtPH;
-    String API_KEY = "BBFF-JCKkapS6WlPhjFVDBPs0KLVtYlCOX3";
-    String varIdSuhu ="5ff93d500ff4c37a420012f9";
-    String varIdHumidity ="5ff93d4e0ff4c37cf639af2e";
-    String varIdMoistureTotal ="5ff975f14763e768092e259b";
-    String varIdMoisture1 ="5ff93d4e4763e7191cfc6cad";
-    String varIdMoisture2 ="5ff975f04763e7687e665ada";
-    String varIdMoisture3 ="5ff975f00ff4c3096c28baaa";
-    String varIdPH ="5ff93d4f73efc33556de3394";
-    String varIdRelay = "60000b4e1d84724cb1c75e92";
+    String API_KEY = VarId.API_KEY;
+    String varIdSuhu = VarId.varIdSuhu;
+    String varIdHumidity = VarId.varIdHumidity;
+    String varIdMoistureTotal =VarId.varIdMoistureTotal;
+    String varIdMoisture1 = VarId.varIdMoisture1;
+    String varIdMoisture2 = VarId.varIdMoisture2;
+    String varIdMoisture3 = VarId.varIdMoisture3;
+    String varIdPH = VarId.varIdPH;
+    String varIdRelay = VarId.varIdRelay;
 
 //    // TODO: Rename parameter arguments, choose names that match
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -283,6 +283,24 @@ public class ValueFragment extends Fragment {
                 StartTime = SystemClock.uptimeMillis();
                 handler.postDelayed(runnable, 0);
                 timerCard.setVisibility(VISIBLE);
+                new UbidotsClient().handleUbidots(varIdRelay, API_KEY, new UbidotsClient.UbiListener() {
+                    @Override
+                    public void onDataReady(final List<UbidotsClient.Value>result) {
+
+                        for (int i=0; i<result.size(); i++){
+                            Log.i("moist3", "onDataReady: "+result.get(0).value);
+                            final String dt = String.valueOf(result.get(0).value);
+                            Handler handler = new Handler(ValueFragment.this.getActivity().getMainLooper());
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    txtMoisture3.setText(dt+"%");
+                                    txtMoisture3.invalidate();
+                                }
+                            }, 5000);
+                        }
+                    }
+                });
                 //databaseReference.child("Pompa").setValue("1");
                 btnSiram.setEnabled(false);
                 btnStop.setEnabled(true);
