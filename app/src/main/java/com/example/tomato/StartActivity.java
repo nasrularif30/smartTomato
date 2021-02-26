@@ -55,6 +55,7 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         FragmentTransaction tra = getSupportFragmentManager().beginTransaction();
         tra.add(R.id.frgmnt, new ValueFragment());
@@ -84,6 +85,7 @@ public class StartActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.profile_menu,menu);
+
         return true;
     }
 

@@ -16,14 +16,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
+import java.io.IOException;
 import java.util.List;
 
 import static android.view.View.INVISIBLE;
@@ -39,8 +49,9 @@ public class ValueFragment extends Fragment {
     int Seconds, Minutes, MilliSeconds, Hours ;
     ListView listView;
     LinearLayout timerCard;
+    Switch swMode;
     Fragment hum,temp,ph,moistA, moist1, moist2, moist3;
-    TextView txtTimer;
+    TextView txtTimer, tvMode;
     Button btnSiram, btnStop;
     TextView txtSuhu, txtHumidity, txtMoistureTotal, txtMoisture1, txtMoisture2, txtMoisture3, txtPH;
     String API_KEY = VarId.API_KEY;
@@ -91,6 +102,9 @@ public class ValueFragment extends Fragment {
         btnStop =  v.findViewById(R.id.stop);
         txtTimer = v.findViewById(R.id.timertext);
         timerCard = v.findViewById(R.id.timer);
+        swMode  = v.findViewById(R.id.sw_mode);
+        tvMode = v.findViewById(R.id.tv_mode);
+        swMode.setChecked(true);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -230,101 +244,145 @@ public class ValueFragment extends Fragment {
             }
         });
 
-        new UbidotsClient().handleUbidots(varIdRelay, API_KEY, new UbidotsClient.UbiListener() {
+//        new UbidotsClient().handleUbidots(varIdRelay, API_KEY, new UbidotsClient.UbiListener() {
+//            @Override
+//            public void onDataReady(final List<UbidotsClient.Value>result) {
+//
+//                for (int i=0; i<result.size(); i++){
+//                    Log.i("relay", "onDataReady: "+result.get(0).value);
+//                    final String dt = String.valueOf(result.get(0).value);
+//                    final Handler[] handler = {new Handler(ValueFragment.this.getActivity().getMainLooper())};
+//                    handler[0].postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            if (dt.equals("1.00"))
+//                            {
+//                                handler[0] = new Handler();
+//                                StartTime = SystemClock.uptimeMillis();
+//                                handler[0].postDelayed(runnable, 0);
+//                                timerCard.setVisibility(VISIBLE);
+//                                //databaseReference.child("Pompa").setValue("1");
+//                                btnSiram.setEnabled(false);
+//                                btnStop.setEnabled(true);
+//                            }
+//                            else
+//                            {
+//                                MillisecondTime = 0L ;
+//                                StartTime = 0L ;
+//                                TimeBuff = 0L ;
+//                                UpdateTime = 0L ;
+//                                Seconds = 0 ;
+//                                Minutes = 0 ;
+//                                MilliSeconds = 0 ;
+//
+//                                txtTimer.setText("00:00:00");
+//                                timerCard.setVisibility(INVISIBLE);
+//                                btnSiram.setEnabled(true);
+//                                btnStop.setEnabled(false);
+//                                //databaseReference.child("Pompa").setValue("0");
+//                            }
+//
+//                        }
+//                    }, 5000);
+//                }
+//            }
+//        });
+        btnSiram =  v.findViewById(R.id.siram);
+        btnStop =  v.findViewById(R.id.stop);
+
+        swMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onDataReady(final List<UbidotsClient.Value>result) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                for (int i=0; i<result.size(); i++){
-                    Log.i("relay", "onDataReady: "+result.get(0).value);
-                    final String dt = String.valueOf(result.get(0).value);
-                    final Handler[] handler = {new Handler(ValueFragment.this.getActivity().getMainLooper())};
-                    handler[0].postDelayed(new Runnable() {
+                if (isChecked){
+                    Toast.makeText(getContext(), "Mode Otomatis", Toast.LENGTH_SHORT).show();
+                    tvMode.setText("Mode Otomatis");
+                    btnSiram.setEnabled(false);
+                    btnStop.setEnabled(false);
+                    //set mode otomatis
+                    new UbidotsClient().handleUbidots(varIdMoistureTotal, API_KEY, new UbidotsClient.UbiListener() {
                         @Override
-                        public void run() {
-                            if (dt.equals("1.00"))
-                            {
-                                handler[0] = new Handler();
-                                StartTime = SystemClock.uptimeMillis();
-                                handler[0].postDelayed(runnable, 0);
-                                timerCard.setVisibility(VISIBLE);
-                                //databaseReference.child("Pompa").setValue("1");
-                                btnSiram.setEnabled(false);
-                                btnStop.setEnabled(true);
-                            }
-                            else
-                            {
-                                MillisecondTime = 0L ;
-                                StartTime = 0L ;
-                                TimeBuff = 0L ;
-                                UpdateTime = 0L ;
-                                Seconds = 0 ;
-                                Minutes = 0 ;
-                                MilliSeconds = 0 ;
+                        public void onDataReady(List<UbidotsClient.Value>result) {
 
-                                txtTimer.setText("00:00:00");
-                                timerCard.setVisibility(INVISIBLE);
-                                btnSiram.setEnabled(true);
-                                btnStop.setEnabled(false);
-                                //databaseReference.child("Pompa").setValue("0");
-                            }
+                            for (int i=0; i<result.size(); i++){
+                                Log.i("moistt", "onDataReady: "+result.get(0).value);
+                                final String dt = String.valueOf(result.get(0).value);
+                                //txtMoistureTotal.setText(dt+"%");
+                                final Handler handler = new Handler(ValueFragment.this.getActivity().getMainLooper());
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (Float.parseFloat(dt)<=20){
+                                            postOnOffRelay("1");
+                                            StartTime = SystemClock.uptimeMillis();
+                                            handler.postDelayed(runnable, 0);
+                                            timerCard.setVisibility(VISIBLE);
+                                            btnSiram.setEnabled(false);
+                                            btnStop.setEnabled(true);
+                                        }
+                                        else {
+                                            MillisecondTime = 0L ;
+                                            StartTime = 0L ;
+                                            TimeBuff = 0L ;
+                                            UpdateTime = 0L ;
+                                            Seconds = 0 ;
+                                            Minutes = 0 ;
+                                            MilliSeconds = 0 ;
 
+                                            txtTimer.setText("00:00:00");
+                                            timerCard.setVisibility(INVISIBLE);
+                                            btnSiram.setEnabled(true);
+                                            btnStop.setEnabled(false);
+                                            postOnOffRelay("0");
+                                        }
+                                    }
+                                }, 5000);
+                            }
                         }
-                    }, 5000);
+                    });
+
+                }
+                else {
+
+                    Toast.makeText(getContext(), "Beralih ke Mode Manual", Toast.LENGTH_SHORT).show();
+                    tvMode.setText("Mode Manual");
+                    handler = new Handler();
+
+                    btnSiram.setEnabled(true);
+                    btnSiram.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            postOnOffRelay("1");
+                            StartTime = SystemClock.uptimeMillis();
+                            handler.postDelayed(runnable, 0);
+                            timerCard.setVisibility(VISIBLE);
+                            btnSiram.setEnabled(false);
+                            btnStop.setEnabled(true);
+                        }
+                    });
+                    btnStop.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            MillisecondTime = 0L ;
+                            StartTime = 0L ;
+                            TimeBuff = 0L ;
+                            UpdateTime = 0L ;
+                            Seconds = 0 ;
+                            Minutes = 0 ;
+                            MilliSeconds = 0 ;
+
+                            txtTimer.setText("00:00:00");
+                            timerCard.setVisibility(INVISIBLE);
+                            btnSiram.setEnabled(true);
+                            btnStop.setEnabled(false);
+                            postOnOffRelay("0");
+                        }
+                    });
+
                 }
             }
         });
-        handler = new Handler();
-        btnSiram =  v.findViewById(R.id.siram);
-        btnStop =  v.findViewById(R.id.stop);
-        btnSiram.setEnabled(true);
-        btnSiram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                StartTime = SystemClock.uptimeMillis();
-                handler.postDelayed(runnable, 0);
-                timerCard.setVisibility(VISIBLE);
-                new UbidotsClient().handleUbidots(varIdRelay, API_KEY, new UbidotsClient.UbiListener() {
-                    @Override
-                    public void onDataReady(final List<UbidotsClient.Value>result) {
 
-                        for (int i=0; i<result.size(); i++){
-                            Log.i("moist3", "onDataReady: "+result.get(0).value);
-                            final String dt = String.valueOf(result.get(0).value);
-                            Handler handler = new Handler(ValueFragment.this.getActivity().getMainLooper());
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    txtMoisture3.setText(dt+"%");
-                                    txtMoisture3.invalidate();
-                                }
-                            }, 5000);
-                        }
-                    }
-                });
-                //databaseReference.child("Pompa").setValue("1");
-                btnSiram.setEnabled(false);
-                btnStop.setEnabled(true);
-            }
-        });
-        btnStop.setEnabled(false);
-        btnStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MillisecondTime = 0L ;
-                StartTime = 0L ;
-                TimeBuff = 0L ;
-                UpdateTime = 0L ;
-                Seconds = 0 ;
-                Minutes = 0 ;
-                MilliSeconds = 0 ;
-
-                txtTimer.setText("00:00:00");
-                timerCard.setVisibility(INVISIBLE);
-                btnSiram.setEnabled(true);
-                btnStop.setEnabled(false);
-                //databaseReference.child("Pompa").setValue("0");
-            }
-        });
 
         txtSuhu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -424,6 +482,7 @@ public class ValueFragment extends Fragment {
             Seconds = Seconds % 60;
             Hours = Minutes/60;
 
+
             MilliSeconds = (int) (UpdateTime % 1000);
 
             txtTimer.setText("" + String.format("%02d", Hours) + ":"
@@ -443,5 +502,13 @@ public class ValueFragment extends Fragment {
         super.onDetach();
     }
 
+    void postOnOffRelay(String id){
+        new UbidotsClient().handleUbidotspost(varIdRelay, API_KEY, id, new UbidotsClient.UbiListener() {
+            @Override
+            public void onDataReady(List<UbidotsClient.Value> result) {
+                Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 }
